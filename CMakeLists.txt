@@ -41,7 +41,7 @@ if(PKG_CONFIG_FOUND)
     pkg_check_modules(OCTOMAP QUIET octomap)
 endif()
 if(NOT OCTOMAP_FOUND)
-    # if pkfconfig is not installed, then fall back on more fragile detection
+    # if pkgconfig is not installed, then fall back on more fragile detection
     # of octomap
     find_path(OCTOMAP_INCLUDE_DIRS octomap.h
         PATH_SUFFIXES octomap)
@@ -54,6 +54,9 @@ endif()
 if (OCTOMAP_INCLUDE_DIRS AND OCTOMAP_LIBRARY_DIRS)
   include_directories(${OCTOMAP_INCLUDE_DIRS})
   link_directories(${OCTOMAP_LIBRARY_DIRS})
+  set(OCTOMAP_FOUND 1)
+endif()
+if(OCTOMAP_FOUND)
   set(FCL_HAVE_OCTOMAP 1)
   message(STATUS "FCL uses Octomap")
 else()
